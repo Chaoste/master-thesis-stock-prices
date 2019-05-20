@@ -1,0 +1,86 @@
+% Source: https://hpi.de/naumann/teaching/master-theses.html
+
+\documentclass[
+        a4paper,     % Format A4
+        titlepage,   % mit Titelseite
+        twoside,     % zweiseitig
+        parskip      % mit Durchschuss
+                                 % (= Abstand zwischen Absätzen, statt Einrückung)
+        ]{scrartcl} % KOMA-Script Grundklasse     texdoc scrguide
+
+% \usepackage{ngeman}              % Deutsche Sprache, neue RS  texdoc germdoc (?)
+\usepackage[T1]{fontenc}          % Schriftkodierung mit Umlauten
+\usepackage{textcomp,amsmath}     % Mathezeichen etc.
+\usepackage{graphicx}             % Graphiken einbinden
+
+\usepackage[utf8]{inputenc}
+\usepackage{todonotes}
+\usepackage{changes}
+\usepackage{float}
+\usepackage{pdfpages}
+
+\usepackage[english]{babel} 
+\usepackage[babel]{csquotes}
+\usepackage[style=numeric-comp, backend=biber, isbn=false, doi=false, url=false, maxcitenames=2, giveninits=true]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{booktabs}
+\usepackage{fancyvrb}% http://ctan.org/pkg/fancyvrb
+\usepackage{caption}
+\usepackage{subcaption}  % includes subfigure
+\usepackage[inline]{enumitem}
+
+\usepackage{url}
+% \bibliographystyle{plain} % dinat uses "u.a." instead "et al."
+% \bibliographystyle{IEEEtranN}
+% BibTeX Styles nach Norm DIN 1505  ->  setup/plaindin
+% https://ctan.org/tex-archive/biblio/bibtex/contrib/german/din1505
+% http://tug.ctan.org/biblio/bibtex/contrib/german/dinat/dinat-index.html
+
+\definecolor{our-orange}{HTML}{FDB863}
+\definecolor{our-violet}{HTML}{B2ABD2}
+\definecolor{our-purple}{HTML}{5E3C99}
+\newtoggle{draft}
+
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+% Change this depending whether you want suggestions and TODOs visible or not
+% \togglefalse{draft}
+\toggletrue{draft}
+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+\iftoggle{draft}{
+% Show suggestions and TODOs if draft is enabled
+\newcommand{\suggest}[2]{\color{blue}{\sout{#1}}\color{red}{\uline{#2}}\color{black}}
+\newcommand{\ttodo}[1]{\color{red}{TODO: #1}\color{black}}
+\newcommand{\comment}[1]{\color{Green}{NOTE: #1}\color{black}}
+}{
+% hide otherwise
+\newcommand{\suggest}[2]{#2} % just use the suggestion
+%\newcommand{\suggest}[2]{}
+\newcommand{\ttodo}[1]{}
+\newcommand{\comment}[1]{}
+}
+
+\newcommand{\eqname}[1]{\tag*{#1}}% Tag equation with name
+
+\usepackage[colorlinks=false, pdfstartview=FitV, linkcolor=black, citecolor=black, plainpages=false, pdfpagelabels=true, urlcolor=black]{hyperref}
+
+\DeclareRobustCommand{\citet}[1]{\citeauthor{#1}~\cite{#1}}
+
+\include{setup/titlepage}
+
+\pagestyle{headings}    % Seitenstil mit Kapitelüberschriften in der Kopfzeile
+
+
+\begin{document}
+    \maketitle    %  Titelseite erzeugen
+    \cleardoublepage % neue Doppelseite
+    \include{sections}
+    
+    \clearpage % auf neuer Seite
+    \addcontentsline{toc}{section}{References}
+    \printbibliography
+    \clearpage
+    % \addcontentsline{toc}{section}{Independence Declaration}  % Declaration of Authorship
+    \input{setup/independence_declaration.tex}
+\end{document}

@@ -1,0 +1,25 @@
+\begin{table*}
+    \centering
+    \setlength{\tabcolsep}{0pt} % Default value: 6pt
+    
+    \begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}cccc}
+        \toprule
+        {} &  Stock Correlation &  Same Industry \\
+        \midrule
+        \textbf{Co-occurrences}     & 0.0799 & 0.0690 \\
+        \textbf{Minimum Distance}   & 0.0947 & 0.1477 \\
+        \textbf{Pairwise Distance}  & \textbf{0.1105} & \textbf{0.1643} \\
+        \bottomrule
+    \end{tabular*}
+    
+    \caption{Pearson's $r$ for the three text-based features \emph{Co-occurrences}, \emph{Minimum Distance} and \emph{Pairwise Distance}, compared with the \emph{Stock Correlation} and the heuristic \emph{Same Industry}.}
+    \label{table:corr-text-r}
+\end{table*}
+
+% {} &  Stock Corr. &  Co-occurrences &  Min. Dist. &  Pairwise Dist. &  Industry \\
+% \midrule
+% \textbf{Stock Corr.}       & 1.0000 & 0.0799 & 0.0947 & 0.1105 & 0.2013 \\
+% \textbf{Co-occurrences}    & 0.0799 & 1.0000 & 0.1594 & 0.1635 & 0.0690 \\
+% \textbf{Min. Dist.}        & 0.0947 & 0.1594 & 1.0000 & 0.8622 & 0.1477 \\
+% \textbf{Pairwise Dist.}    & 0.1105 & 0.1635 & 0.8622 & 1.0000 & 0.1643 \\
+% \textbf{Industry}          & 0.2013 & 0.0690 & 0.1477 & 0.1643 & 1.0000 \\

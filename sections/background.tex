@@ -1,0 +1,167 @@
+The following subsection provides a brief introduction into the financial markets and how to treat economic variables. Consequentially, the next subsection covers statistical hypothesis test which will be used excessively in the later evaluation of stock prices in Section~\ref{subsection:time_series_evaluation}. However, it should be noted that financial theory, econometrics and statistics are broad fields for which a comprehensive introduction cannot be provided in this work.
+
+\subsection{Stock Markets}
+
+% Financial sector finances the real economy, i.e. companies with product-oriented business.
+% e.g. Origins of Apple
+
+% securities are bonds, stocks 
+
+Capital markets are very important in modern economy. Because companies usually need money for productive use in advance, investors come into play giving the opportunities for companies to emerge and develop. For linking people who hold capital with those seeking capital, stock exchanges enable the fast capital flow among them. The traded capital on these exchanges defined by so called securities.
+
+A security is a financial instrument which accommodates several categories in which one can invest. The most common type of securities are shares representing the investment in an entity like a company. An investor buying shares of a company thereby becomes a shareholder including the right to share in the company's profit and the right of co-decision in terms of corporate policy. The value of such shares is determined by the company's worth, which in turn is determined by supply and demand for its shares in the market. Besides these natural market dynamics, the price might also be affected by events like stock splits.
+
+\paragraph{Stock Splits}
+Such stock splits are adjustments to the number of available shares and their respective price. If the price increases substantially up to a high value, the shares becomes less affordable to small investors. Hence, the number of shares might be doubled and share prices halved in order to ensure the same amount of traded money for this company but also more affordable share prices. As an extreme example, the price for one share in \emph{Apple Inc.} almost reached \$700 in 2014. Subsequently, they issued a 7-for-1 stock split, which led to seven times shares as before, to make their shares more accessible to potential shareholders.
+
+If investors are speaking of shares in multiple companies, these shares are called stocks which do not refer to a particular company. Throughout this work, the more general term stock is used, even though it might refer to a single company.
+% https://www.stlouisfed.org/education/tools-for-enhancing-the-stock-market-game-invest-it-forward/episode-1-understanding-capital-markets 
+% https://www.quora.com/How-exactly-do-stock-prices-get-determined
+% https://www.investopedia.com/terms/c/capitalmarkets.asp
+% https://www.investopedia.com/ask/answers/difference-between-shares-and-stocks/
+% https://www.investopedia.com/terms/s/stocksplit.asp
+
+\paragraph{Market Indices}
+Because stock exchange tend to include an unmanageable number of shares, a stock market index is used which uses a selected number of stocks in order to represent the well-being of a separate sector of the market or even the whole market. Thereby, the index value is calculated by a weighted average of the share prices for these selected index components, whereas the weighting is usually based on the traded volume. For example, the \emph{NYSE Arca Oil Index} measures the performance of the oil industry by involving stocks of leading companies in this sector. To grasp the performance of the whole American stock market, a market index like S\&P~500 is proposed, which is an abbreviation for the rating agency \emph{Standard \& Poor's}. It includes 500 companies from two large stock exchanges, namely New York Stock Exchange (NYSE) and NASDAQ, whereby the number of index components might slightly diverge. Possible reasons for this are acquisition, merger, bankruptcy or dual-class listings. The latter one describes companies which provide multiple classes of stocks with varying voting rights for shareholders. To give an example, shares of \emph{Alphabet Inc.} are divided into three classes, where one class is reserved for founders and executives and therefore not publicly traded. It gives them ten times the voting rights as shares which can be bought by investors.
+
+Besides market indices, another measure is quite common, namely the volatility. It seeks to capture the uncertainty of investors in the market by the stability of stock prices. A popular volatility index in the American stock market is the \emph{CBOE Volatility Index} (VIX) which measures volatility by the components of the S\&P~500 index. Hereby, one popular observation is a negative correlation between VIX and S\&P~500, i.e. the uncertainty increases if the market is performing poorly \cite{Fleming1995PredictingMeasure}.
+
+
+\paragraph{Market Analysis}
+Under the supposition of stock predictability, there are two common approaches for analysing and predicting market movements, namely \begin{enumerate*}[label=(\roman*)]
+\item technical analysis and 
+\item fundamental analysis
+\end{enumerate*} \cite{KhadjehNassirtoussi2014TextReview}. The former one draws upon the belief that stock prices reveal patterns repeating themselves. Hence, historical stock prices are analysed in order to make predictions on their future movements. For analysis, the prices are typically represented by a multivariate time involving variables such as the high price, low price, opening price, closing price and trade volume. These five most popular variables are often referred to as OHLCV. Some popular analysis tools upon these OHLCV values are stock charts and technical indicators like moving average and momentum.
+
+The second approach, fundamental analysis, considers a more sophisticated approach examining all available fundamental data that may influence market movements \cite{LopezdePrado2018AdvancesLearning}. Instead of using statistical methods on pure numerical data, company related information and external factors, such as corporate policy and the political climate, are included into the assessment of a company. A popular source for collecting information like these are financial news since they are known to influence financial markets \cite{Vlastakis2012InformationVolatility, KhadjehNassirtoussi2014TextReview}. Based on the comprehensive conduction of a company, its intrinsic value is approximated. If the current stock's price does not reflect the assessed value, a fundamental analysis recommends investing into this stock before it converges to this value in the future. This method is supported by research revealing that stock prices need some time to adapt to new information \cite{Hsu2016BridgingEconomists}.
+
+% https://drive.google.com/file/d/18l7y9Oh9uEo6yANFsUDggIIaOPDYqsR1/view
+
+
+
+% https://drive.google.com/file/d/1ToXIJMtIPe2d-rU1EqozIqP_pkZSrUv1/view
+% https://drive.google.com/file/d/18l7y9Oh9uEo6yANFsUDggIIaOPDYqsR1/view
+% https://sci-hub.se/10.1016/j.eswa.2014.07.040
+% https://www.fundamentalsofaccounting.org/fundamental-technical-analysis/
+% Short intro to Quantitative, Fundamental, Technical Analysis: Vargas2017
+
+% \emph{The second or millisecond impact prediction is the element that fuels an entire industry by the name of micro-trading in which special equipment and vicinity to the news source as well as the market computer systems is critical} \cite{KhadjehNassirtoussi2014TextReview}
+
+%  Hsu et al. (2016) points out, that stock prices do not reflect new information immediately, but need some time to adapt to it. Forecasting the markets behaviour over the next hour (Short-term) is therefore affected by higher volatility and lower predictive accuracy. Then again, the new information loses its advantageous influence usually over the next days except for extreme influences like the Lehman bankruptcy (Yoshihara et al. 2014). As a trade-off between these two boundaries, related work often focus on a prediction window of one day or week. When relying on information extracted from news, it is a common assumption that this information is of most value for the next days stock price movement. \todo{There should be many possible citations from the RW Statistics section}
+
+
+% Side effects on the market:
+% Examples for market manipulation like the Silver Thursday (Pincus and Kalman 2004)
+% Mutual fund herding are not destabilizing but speeding up the price-adjustment to new information (Wermers 2002)
+%  There are pattern like the Monday Effect or the January Effect and U shape in intraday volatility
+% As stated in the previous section, investors are expected to act rational and therefore ensure a stock price which is close to its intrinsic value.
+
+
+
+% Optional:
+% Australian and New Zealand stock prices are unit root process denying their predictability. Evidence for EMH: \cite{Narayan2005} TODO: Evidence against EMH (Predictability is existing \cite{Hsu})
+% The theory and hypotheses based on rationality originate from the Rational Choice Theory
+% \emph{The literature of stock market prediction was initiated by economists (Keynes, 1937).} (Ding et al. 2014)
+% On quantitative analysis and conclusion to ML: Tsantekidis2017
+
+
+% Random Walk: "" (Regnault 1863)
+% Became popular through the work by Malkiel1973 (A random walk down wall street)
+
+% Efficient Market: "Theory of speculation" (Bachelier 1900)
+% file:///C:/Users/Thomas/Downloads/Jovanovic_Le_Gall_2001.pdf
+% file:///C:/Users/Thomas/Downloads/ObaladeandMuzindutsi.pdf
+
+% Random Walk Theory states that stock price move accordingly to a random walk.
+%  Three versions of the EMH are established: strong, semi-strong, weak. [...] In its weak form which is similar to the former random walk theory, the EMH states that price returns reveal a Brownian Motion, i.e. have no memory and are independent in time.
+% https://www.researchgate.net/publication/284660721_Theory_of_speculation/citations
+
+% Three forms:
+% https://sci-hub.se/10.2307/2325486
+% https://drive.google.com/file/d/1ToXIJMtIPe2d-rU1EqozIqP_pkZSrUv1/view
+% Weak:
+% https://investinganswers.com/financial-dictionary/economics/weak-form-efficiency-5172
+% https://www.investopedia.com/terms/w/weakform.asp
+% EMH vs RWT: https://quant.stackexchange.com/questions/25794/do-efficient-market-hypothesis-and-random-walk-theory-convey-the-same-concept/25796
+
+
+% \subsection{Econometrics}
+% https://www.researchgate.net/post/Any_recommended_techniques_for_testing_causal_relations
+
+% \begin{itemize}
+%     \item Order Of Integration / Unit root (-> econometric time series are considered to be unit root)
+%     \item Most economic data is I(1), non-stationary (http://cmi.comesa.int/wp-content/uploads/2014/06/Stationarity-and-Cointegration-Analysis.pdf)
+%     \item Cointegration and Error Correction Models (Engle and Granger’s two-step procedure)
+%     \item Vector Autoregression
+%     \item Granger Causality (vs. real causality)
+    
+%     \item Explain order of integration since its value is mandatory to know before looking out for features like cointegration, correlation or Granger Causality
+% \end{itemize}
+
+
+\subsection{Statistics}
+\label{subsection:bg-statistics}
+
+The science of statistics mainly deals with data-based methods. A substantial tool in order to describe data without any foreknowledge are data distributions on which further analysis and interpretation can be conducted. Among the manifold of data distribution, the most popular one is the normal (or Gaussian) distribution.
+ 
+ % The family of Student's t distribution varying in kurtosis. The greater t gets, the more similar it becomes to to a normal distribution.
+
+Since in many real-world cases the underlying data distribution is rather unknown, inferential statistics expect samples of a population to be representative for the regarding distribution of this population. The likeliness of observations based on such samples to be true for the whole population, increases with the number of samples which is described by the law of large numbers.
+
+\paragraph{Skewness and Kurtosis}
+Using inference, statistics like mean, standard deviation, skewness and kurtosis of a data distribution can be approximated. Hereby, skewness and kurtosis are describing the dispersion of data. To be more specific, the former one describes the asymmetry of the distribution. While a skewness of zero represents a symmetrical distribution with the same number of data points on both sides of the mean, a positive or negative skew indicates that the mass of the distribution is concentrated on the left or right side respectively, as seen from the mean. Kurtosis measures the thickness or heaviness of the tails of a distribution. High kurtosis (greater than three) describes a high peak in the center and heavy tails, which can also be seen as evidence for many outliers. Conversely, a distribution with low kurtosis has light tails and therefore appears to lack outliers. While a distribution with a kurtosis of three (as in the normal distribution) is called mesokurtic, it is called leptokurtic or platykurtic for a higher or lower value respectively. Financial variables often indicate a leptokurtic distribution leading to more extreme values or values closer to the mean \cite{Franke2010StatisticsMarkets}.
+
+
+\paragraph{Hypothesis Test}
+In quantitative research, hypothesis tests are examined on data samples in order to draw probabilistic conclusions. These conclusions can be generalized for the underlying population of the observed samples. Therefore, usually a null hypothesis $H_0$ and a contrary alternative hypothesis $H_1$ are defined. For example, the Jarque-Bera test \cite{Jarque1980EfficientResiduals} defines a null hypothesis that the investigated samples are drawn from a normal distribution. The resulting test statistic is usually transformed to a probability $p$ representing the probability of observing the selected set of samples, given the null hypothesis is true. Hence, $p$ can be used to reason about whether or not the collected data fits the previously defined hypothesis.
+
+In order to decide if the null hypothesis can be rejected and therefore prefer the alternative hypothesis, a significance level $\alpha$, e,g, 0.05, is defined in advance which functions as a cut-off value. Choosing a smaller $\alpha$ suggests a more robust interpretation of the null
+
+If $p \leq \alpha$, one found significant evidence in favour of $H_1$. Choosing a smaller $\alpha$ ensures a more robust outcome for this interpretation. Otherwise if $p > \alpha$, it is stated that the test failed to reject $H_0$. Though, one cannot accept $H_0$ by design of the test.
+
+When conducting hypothesis tests in Section~\ref{subsection:time_series_evaluation}, multiple tests will be applied to ensure more stable results. However, the outcome of such hypothesis tests should be treated with caution. They only provide probabilistic results based on what is more likely to be true.
+
+Most hypothesis tests rely on some statistical assumption on the samples used for testing. One important constraint is that samples are independently and identically distributed (i.i.d.). Hence, large samples drawn from the same population are expected to reveal approximately equal properties and therefore lead to the same results during inference. When it comes to time series analysis, there are some popular cases known for which samples are known to be not i.i.d.:
+% \begin{enumerate}[
+% leftmargin=0pt, itemindent=20pt,
+% labelwidth=15pt, labelsep=5pt, listparindent=0.7cm,
+% align=left, label=(\roman*)]
+\begin{itemize}
+    \item A non-stationarity variable involves samples depending on time and thus they are not identically distributed.
+    \item If the samples of a variable are found to be autocorrelated with previous samples, they are not independently distributed.
+    \item The variance of a time series, also denoted as volatility, might change over time. This is referred to as heteroscedasticity (heterogeneous volatility) and contradicts with being identically distributed because the variance is not stable.
+\end{itemize}
+
+To give an example in favour of i.i.d., a independent white noise process fulfills all constraints. It requires \begin{enumerate*}[label=(\roman*)]
+    \item to have no autocorrelation (serially uncorrelated)
+    \item zero mean,
+    \item constant and finite variance and
+    \item independently drawn samples
+\end{enumerate*}. The correlation measure Pearson's $r$ which is used throughout this work, assumes samples to be i.i.d. Hence, it need to be examined if any contradictions exist.
+
+%  are an important assumption in many inferential statistics like Pearson's $r$ which uses samples to approximate the correlation of their regarding populations. Further, the population is required to be normal distributed but studies showed that it is quite robust for non-normal distributions \cite{Bishara2012TestingApproaches}.
+% https://sci-hub.se/10.2466/pms.1976.43.3f.1319
+% If two variables are i.i.d., then they must have the same distribution.Which means they have the same parameters namely mean, std dev.
+% 3. iid is more precisely defined concept. If e.g. stock returns are iid, it means they are drawn from the same distribution each day. If people say that something is random, they usually mean unpredictable. For example if stock returns are drawn some days from distribution with high variance, and other day from distribution with low variance, they are still random (not predictable), but they are not iid.
+
+
+
+% Sources:
+% https://statistics.laerd.com/statistical-guides/hypothesis-testing-2.php
+% https://machinelearningmastery.com/statistical-hypothesis-tests/
+% https://stattrek.com/hypothesis-test/hypothesis-testing.aspx
+% https://www.researchgate.net/post/1_What_is_the_relationship_among_iid_randomness_autocorrelation_heteroskedasticity
+% https://math.stackexchange.com/questions/223373/iid-variables-do-they-need-to-have-the-same-mean-and-variance
+
+% Optional:
+% The area below $\alpha$ is called the region of rejection and 
+% is called the confidence interval or region of acceptance which 
+
+% one or two-tailed statistic
+% type I and type II errors
+% instead of p, sometimes only the test statistic is given. For those cases, critical values (which are usually provided within tables) can be used which denote the appropriate values for common significance levels, such as 0.10, 0.05 or 0.01.
+
+% For example, the significance for an observed correlation statistic can be determined by transforming it to the confidence intervals of a hypothesis test 
+
+
+% e statistical inference procedures designed to test that the underlying distribution of a random variable is normally distributed

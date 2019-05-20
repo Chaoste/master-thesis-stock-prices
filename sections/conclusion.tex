@@ -1,0 +1,65 @@
+% Guidance: https://warwick.ac.uk/fac/soc/al/globalpad/openhouse/academicenglishskills/writing/conclusions/
+% https://wordvice.com/how-to-present-study-limitations-and-alternatives/
+% Examples:
+
+Finding evidence for the impact of business relationships on a stocks intrinsic value is challenging. This work addressed this challenge by applying statistical methods and concludes with a correlation analysis to examine the presence of such connection. Based on four years historical stock prices and seven years financial news, evidence was found supporting my hypothesis. However, limitations and assumptions needed to be stated since both features, business relationship and intrinsic value, are not directly observable. Instead features were introduced which are believed to work as proxies for these information.
+
+% Because a stocks intrinsic value is assumed to be unknown (hence see Section~\ref{section:introduction})
+In order to find out, to what extent a stock price is determined by business relationships, it is examined how well a stock price can be described by stock prices of related companies. This relationship to other stock prices will be correlated with the business relationships represented by co-occurrences from news articles. In order to find a valuable representative, three different features are proposed for measuring co-occurrences. As resulted from evaluation, the \textbf{Pairwise Distance} is considered to be the most valuable one among these.
+
+By correlating co-occurrences in news with stock correlations, the connection of both features is determined. The resulting correlation coefficient is significant and thereby considered to show a first relation between stock prices and business relationships. I suspect this relation to have an underlying causal link. However, this speculation of causality cannot be examined upon observational data because the experiment will always be partly uncontrolled and therefore prone to unknown external variables. Therefore, to find a significant correlation is suggestive (but not a proof) of “causality” between these two features.
+
+\subsection{Outlook}
+
+Both features, co-occurrence and stock correlation, appear to be valuable but rely on some restrictive assumption like an  persisting relationship across the whole period covered by the chosen data. However, the relationship might be better examined piecewise and therefore be able to change with time. 
+Further, this work focused on a broader application of simultaneous correlation on a large set of historical stock prices and financial news collecting first evidence. By treating all variable by the same potentially imprecise method, the problem is believe to be adequately bypassed. To describe relationships more precise, a lagged relationship between economic variables should be taken into account \cite{Kosapattarapim2017GrangerThailand}. This means that a variable depends upon another variable from a previous time period with the time difference being the so called lag. Prominent concepts for measuring lagged relationship are cointegration \cite{Engle1987Co-IntegrationTesting} and Granger Causality \cite{Granger1969InvestigatingMethods}. The same lagged relationship might also be considered for comparing stock correlations and business relationships.
+
+Instead of comparing both features by statistical or econometric measures, they might also be compared in terms of graph similarity. By creating graphs from both features separately, as exemplary shown in Figures~\ref{fig:graph-correlations} and \ref{fig:graph-cooccurrence-pairwise}, the graph edit distance \cite{Koutra2016AlgorithmsMatching} or relaxation algorithm of the Quadratic Assignment Problem \cite{Carletti2016ExactRecognition} between them might by used for calculating similarity.
+
+
+% Measure graph differences with QAP Correlation
+% QAP Correlation in Python: https://github.com/lisette-espin/mrqap-python
+% Do I have isomorphic or inexact isomorphic graphs I want to correlate? Exact -> Graph Edit Distane
+% Similarity Measures: https://www.cs.cmu.edu/~jingx/docs/DBreport.pdf
+% Inexact GM - contains Isomorphic Definition: https://www.aaai.org/Papers/FLAIRS/2006/Flairs06-115.pdf
+% Inexact vs exact matchings: https://sci-hub.se/10.1007/978-1-4419-6045-0_7
+% https://hal.archives-ouvertes.fr/tel-01315389/document
+
+As shown by \citet{Ding2014UsingInvestigation}, thoughtful preprocessing and feature selection is an important task for NLP. Hence, it is suggested that the inclusion of more sophisticated methods for the relationship of companies in text corpora is substantial. To pick up a few examples for improving text-based features in this context: Concept maps \cite{Li2017DiscoveringCompanies}; symmetric thermal optimal path (TOPS) \cite{Meng2017SymmetricPolicies}; bag-of-keywords \cite{Peng2016LeverageNetworks}; sentiment WordNet \cite{Zhai2007CombiningPrediction, KhadjehNassirtoussi2015TextSentiment}.
+
+% Apply TOPS from https://arxiv.org/abs/1408.5618 to determine the time-dependent lead-lag relationship
+
+Further, the correlation of stock prices can be improved in order to achieve a more precise and valuable feature. For example, seasonality might be filtered out with a seasonal ARMA or a larger differencing windows of one year instead of one day. On the one hand, both approaches are able to completely remove seasonality but, on the other hand, require a larger set of historical stock prices.
+
+Even though real causality between two economic variables can never be guaranteed in the context of financial markets, the examination of usability in use cases like stock price prediction might be an interesting future direction. As common practice for finding evidence with prediction model (e.g. \cite{Peng2016LeverageNetworks}), two prediction models, one with and one without incorporating business relationships, are compared for showing a possible improvement. For incorporating relational features into a prediction model such as a NN, a node embedding or a graph convolutional layer might be used, as proposed by \citet{Chen2018IncorporatingPrediction}.
+
+Another use case for using business relationships and stock relationships can be market observation and analysis. In order to measure the value and credit risk of a company, competitors, suppliers, subsidiaries and other related companies might be considered to give a better assessment. Both business and stock relationships can be incorporated into a corporate graph and therefore support in understanding the complex net of relationships among companies.
+
+Last but not least, this work is hoped to be advantageous to other scientists working with financial markets and economic variables by pointing out a rather new feature of business relationships.
+
+\clearpage
+
+\section*{Acknowledgment}
+
+I thank Tim Repke, my supervisor throughout the last six months. He supported me through extensive discussions and guided me along the road so I would be able to stick to the planned time frame. Further, I thank Dr. Ralf Krestel who empowered me to find a justifiable foundation for my thesis by critically questioning my first approaches.
+
+I like to thank Janna Lipenkova, CEO of the company Anacode \footnote{https://anacode.de}, for patiently listening to my ideas and supporting me with background information and possible improvements for my text analysis.
+
+Finally, I am very grateful to my brother Max Kellermeier who gave me extremely valuable comments on my thesis. Without his passionate feedback, my logical chain of arguments would be much more incomprehensible.
+
+
+% Pearson vs. Spearman
+% https://stats.stackexchange.com/questions/8071/how-to-choose-between-pearson-and-spearman-correlation
+
+
+% Find opt. lag for…
+%   Cross-Correlation with price correlation
+%   Cointegration / Granger Causality (relate to Kosapattarapim)
+%   Akaike Information criterion for lag
+
+
+% Acknowledgement
+% This work started initially with the Master Thesis of Jonas Nikolaus Debatin performed at ETH Zurich
+% in 2011 and evolved into completely novel methods and results. We are grateful to the referees for their
+% constructive suggestions. Possible remaining issues are our responsibility. This work was supported in part
+% by the National Natural Science Foundation of China (71131007, 71501072 and 71532009).

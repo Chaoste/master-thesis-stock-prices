@@ -1,0 +1,33 @@
+% quote from the booktabs documentation: 1. Never, ever use vertical lines. 2. Never use double lines. I tend to agree
+
+% Categorical (vs. Regression)
+% Multiple Companies
+% Unstructured (Text Based)
+% Fundamental and/or Technical Analysis
+% Stock Price Related (vs Index/Indicator)
+% Long vs. Mid vs. Short Term
+% Stock Exchange / Index / Company
+
+\newcommand{\mlcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\begin{table*}[!ht]
+    \centering
+    \setlength{\tabcolsep}{0pt} % Default value: 6pt
+    {\tiny
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cccccc} \toprule
+        {Authors (year)} & {Data source} & {Target output} & {\mlcell{Sampling\\period}} & {Method} & {\mlcell{Performance\\measure}} \\
+        \midrule \mlcell{Ding et al.\\(2014)} & \mlcell{Reuters \& \\Bloomberg} & \mlcell{up/down over\\days/weeks/months} & 2006-2013 & OIE & MCC \\
+        \smallskip \\
+        \mlcell{Zhai et al.\\(2007)} & \mlcell{Australian Financial\\ Review (1 comp.)} & \mlcell{up/down over\\ the next day} & 2005-2006 & SVM & acc. \\
+        \smallskip \\
+        \mlcell{Yoshihara et al.\\(2014)} & \mlcell{Nikkei Index \&\\Newspaper} & \mlcell{up/down of\\next days MACD} & 1999-2008 & RNN+RBM+DBN & error rate \\
+        \smallskip \\
+        \mlcell{Akita et al.\\(2016)} & \mlcell{Nikkei 225 comps. \&\\Newspaper} & \mlcell{regression of\\close price} & 2001-2008 & \mlcell{Paragraph Vector \&\\LSTM} & \mlcell{market\\simulation} \\
+        \smallskip \\
+        \mlcell{Chen and Wei\\(2018)} & TuShare - SSE \& SZSE & \mlcell{up/down over\\ the next day} & 2017 & LSTM \& GCN & acc. \\
+        \bottomrule
+    \end{tabular*}}
+    \caption{A summary of related studies on stock market prediction.}
+    \label{table:research_overview}
+\end{table*}

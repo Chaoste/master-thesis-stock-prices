@@ -1,0 +1,57 @@
+%%% Introduction:
+This section is designed to calculate correlation (or cross-correlation) among stock prices. Therefore, the Pearson product-moment correlation coefficient, denoted as $r$, will be calculated for each pair of stock prices:
+
+\newcommand{\return}[1]{r_#1^{(t)}}
+\newcommand{\returnt}[2]{r_#1^{(#2)}}
+\newcommand{\stock}[1]{s_#1^{(t)}}
+\newcommand{\stockt}[2]{s_#1^{(#2)}}
+\newcommand{\stockmean}[1]{\bar s_#1}
+
+\begin{align}
+    r = \frac{\sum _{t=1}^{n} (\stock{i} - \stockmean{i})(\stock{j} - \stockmean{j})}{\sqrt{\sum _{t=1}^{n} (\stock{i} - \stockmean{i})^2 }  \sqrt{\sum _{t=1}^{n} (\stock{j} - \stockmean{j})^2 }}
+    \label{formula:pearson_r} \\ \eqname{Pearson's $r$}
+\end{align}
+
+where $\stock{i}$ and $\stock{j}$ are the preprocessed stock prices of two companies at trading day $t$ and $n$ is the sample size. $\stockmean{i}$ and $\stockmean{j}$ are the sample means.
+
+Unfortunately, stock prices produce time series comprising characteristics like autocorrelation and heteroscedasticity which distort the results of statistical inference (Section~\ref{subsection:bg-statistics}). The analysis of economic variables, better known as econometrics, originated from the application of statistical methods on financial time series and deals with such problems to discover models and relationships among economic variables. To avoid spurious correlation \cite{Yule1926WhyTime-Series} and conclude with meaningful cross-correlation coefficients, this analysis conducts prewhitening methods from econometric and time series analysis on the collected stock prices.
+
+For applying our analysis including hypothesis tests and regression models, we use the implementations by the python modules \emph{scikit-learn} \cite{Pedregosa2011Scikit-learnPython} and \emph{statsmodels}.
+
+\subsection{Data Processing}
+\label{subsection:data_processing}
+\input{sections/statistics/data_processing.tex}
+\input{sections/statistics/data_modelling.tex}
+
+
+\subsection{Time Series Evaluation}
+\label{subsection:time_series_evaluation}
+\input{sections/statistics/evaluation.tex}
+
+\subsection{Time Series Correlation}
+\label{subsection:cross_correlation}
+\input{sections/statistics/correlation.tex}
+
+
+
+
+% Prediction:
+
+% For experiments incorporating both datasets only the overlapping time period is used. Training: 2010 - 2013 (1st half), Test: 2013 (2nd half). Test is left out up to the final evaluation. The training set will be splitted into chunks to apply cross-validation (as pointed out by Hsu et al) along time series (e.g. Li et al 2014).
+% How to upsample stock prices?
+% Stratified sampling to ensure similar class distribution in train, val & test ?
+% Evaluate good class threshold
+% Evaluate good prediction frame size
+
+
+
+%%% Links Stack
+% Links about regression steps
+% Example 1: Regression Diag http://songhuiming.github.io/pages/2016/12/31/linear-regression-in-python-chapter-2/
+% Example 2: Regression Diag https://www.statsmodels.org/0.8.0/examples/notebooks/generated/regression_diagnostics.html
+% Example: ARIMA & GARCH modelling http://www.blackarbs.com/blog/time-series-analysis-in-python-linear-models-to-garch/11/1/2016
+% Example 3: Testing for Unit root and cointegration
+% https://pdfs.semanticscholar.org/7ce6/2a0c7f6dab85f264a5403bf9b99a0f20a156.pdf
+% Example: Apply ARMIA vs GARCH  https://scialert.net/fulltextmobile/?doi=jas.2011.1129.1135
+% Methodology for ARIMA, GARCH, etc.: https://sci-hub.se/10.2139/ssrn.2540535
+% Example 1: Regression Model https://www.kaggle.com/benjibb/prototype-gspc

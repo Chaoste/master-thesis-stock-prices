@@ -1,0 +1,26 @@
+\begin{table*}
+    \centering
+    \setlength{\tabcolsep}{0pt} % Default value: 6pt
+    
+    \begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}cccc}
+        \toprule
+        {} &  Stock Correlation &  Same Industry \\
+        \midrule
+        \textbf{Co-occurrences}    & \textbf{0.0505} & 0.1431 \\
+        \textbf{Min. Dist.}        & 0.0479 & 0.1377 \\
+        \textbf{Pairwise Dist.}    & 0.0497 & \textbf{0.1435} \\
+        \bottomrule
+    \end{tabular*}
+    
+    \caption{Kendall's $\tau$ for the three text-based features \emph{Co-occurrences}, \emph{Minimum Distance} and \emph{Pairwise Distance}, compared with the \emph{Stock Correlation} and the heuristic \emph{Same Industry}.}
+    \label{table:corr-text-tau}
+\end{table*}
+
+
+% {} &  Stock Corr. &  Co-occurrences &  Min. Dist. &  Pairwise Dist. &  Industry \\
+% \midrule
+% \textbf{Stock Corr.}       & 1.0000 & 0.0505 & 0.0479 & 0.0497 & 0.1213 \\
+% \textbf{Co-occurrences}    & 0.0505 & 1.0000 & 0.9118 & 0.9349 & 0.1431 \\
+% \textbf{Min. Dist.}        & 0.0479 & 0.9118 & 1.0000 & 0.9591 & 0.1377 \\
+% \textbf{Pairwise Dist.}    & 0.0497 & 0.9349 & 0.9591 & 1.0000 & 0.1435 \\
+% \textbf{Industry}          & 0.1213 & 0.1431 & 0.1377 & 0.1435 & 1.0000 \\

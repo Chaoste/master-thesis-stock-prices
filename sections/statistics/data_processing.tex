@@ -1,0 +1,68 @@
+% https://drive.google.com/file/d/18l7y9Oh9uEo6yANFsUDggIIaOPDYqsR1/view
+
+In the following, the stock prices will be transformed to account for preconditions of correlation analysis since it requires independently and identically distributed (i.i.d.) samples \cite{Franke2010StatisticsMarkets}. The most important of those are not existing autocorrelation (also known as serial correlation) and homoscedasticity but also other constraints which will be examined after the data was fully processed. In the last preprocessing step, autoregressive models will be conducted to deal with remaining autoregressive patterns.
+
+% MOVE TO AR: Before applying regression on time series, multiple characteristics need to be examined in advance since they can distort the results.
+% In order to achieve a stationary variable, the original data is differenced vanishing the unit root.
+% Autocorrelation can arise in various forms, e.g. unit root, trend-stationary or moving-average processes
+
+\subsubsection{Stationarity}
+\label{subsubsection:processing:stationarity}
+Time series reveal roots which indicate the dependency on previous values. If the influence of such a root persists over time and prevents the series to return to a stationary mean, this root is called a unit root \cite{Engle1987Co-IntegrationTesting} and the series is designated non-stationary. Stock prices are assumed to contain a unit root \cite{LopezdePrado2018AdvancesLearning} which can be accounted for by differencing the time series. Depending on the data one uses, this can be done by taking the absolute or relative differences between each sample:
+
+\begin{align}
+    \Delta_i^{(t)} &= c_i^{(t)} - c_i^{(t-1)} \label{formula:abs_diff} \\ \eqname{Absolute Difference} \\
+    \Delta_i^{(t)} &= \frac{c_i^{(t)}}{c_i^{(t-1)}} \label{formula:rel_diff} \\ \eqname{Relative Difference}
+\end{align}
+
+where $c_i^{(t)}$ is the unmodified closing stock price at trading day $t$.
+
+To have comparable measures among stocks with different levels, the relative difference is used hereinafter. The selected dataset provides the open, close, high and low stock prices for each day so there are various ways to create returns, i.e. differences of the daily stock prices. \citet{Hong1998TradingClosures} provides empirical findings about recurring patterns in returns including that open-to-open returns are more volatile than close-to-close returns. \citet{Wang2009StatisticalReturn} provide evidence that intraday (open-to-close) and overnight (close-to-open) returns have significantly different properties concluding that one shall not mix them. \citet{Li2014NewsAnalysis} considers daily open-to-close prices arguing that it is less prone to seasonality and the more volatile non-trading gaps across weekends and holidays. 
+
+The skewness and kurtosis of the current data investigated supports these findings. The distributions of open-to-open and close-to-close returns reveal a high kurtosis, conforming with related work that stock prices are leptokurtic \cite{Morgan1976StockHeteroscedasticity}. For the overnight returns extremely high kurtosis is observed upon the data used in this work. In contrast, the kurtosis of intraday returns is approximately three which equals the kurtosis of a normal distribution. For the skewness, we see a similar behaviour. The overnight returns revel a large negative skewness. While open-to-open and close-to-close returns substantiate a moderate negative skew (-0.1 in average) coinciding with related work, the intraday returns are distributed with a slightly positive skew (0.06 in average). Because of their more normal like distributions, intraday returns are used in the following which are calculated by the formula in Eqn.~\eqref{formula:return}. From a theoretical point of view, it is even more intelligible to select the returns across the period during high activity on the market. The returns are more likely to represent the impact of actual news and therefore reach faster a stable price level.
+
+\begin{align}
+    r^{(t)}_i &= \frac{c^{(t)}_i}{o^{(t)}_i}
+    \label{formula:return} \\ \eqname{Intraday Return}
+\end{align}
+
+where $o_i^{(t)}$ and $c_i^{(t)}$ are the open and close prices for a stock at trading day $t$.
+
+
+\subsubsection{Homoscedasticity}
+\label{subsubsection:processing:homoscedasticity}
+Another precondition for correlation is homogeneous volatility (variance in the context of time series), in the following denoted as homoscedasticity. The lack of this property is called heteroscedasticity. Unfortunately, stock prices are assumed to be heteroscedastic \cite{Morgan1976StockHeteroscedasticity}. In most cases, this can be addressed by modelling the time series with a generalized autoregressive conditional heteroscedasticity
+(GARCH) model, using heteroscedasticity-consistent standard errors (e.g. Newey-West estimator) \cite{Millo2017RobustApproach} or applying robust regression methods (e.g. weighted least squares regression). If this not handled in any way, most test statistics tend to report biased results, e.g. the method of ordinary least squares (OLS) is not anymore the best linear unbiased estimator resulting in downwards biased coefficients \cite{Hallin2014Gauss-MarkovStatistics}. Usually, there can be various reasons for observing heteroscedasticity. For example. sensor data or data extracted from very noisy sources, such as text, may reveal measurement errors. In the context of stock prices, the heteroscedasticity is most likely caused by leaving out exogenous factors which will be treated in the following step of preprocessing.
+
+% https://mpra.ub.uni-muenchen.de/54954/1/MPRA_paper_54954.pdf
+% "Some statistical tests, for example the analysis of variance, assume that variances are equal across groups or samples. The Levene test can be used to verify that assumption."
+
+
+One popular method for heuristic data stabilization is the Box-Cox transformation \cite{Box1964AnTransformations}. It is a simple power transformation which is applied on the calculated returns \eqref{formula:boxcox} to stabilize the data. It is assumed to mitigate heteroscedasticity, which will be examined in a later section. As suggested by \citet{Box1964AnTransformations}, the model's power parameter $\lambda$ is determined by maximizing the log-likelihood function.
+
+\begin{align}
+    r_i^{(t)(\lambda )} &={\begin{cases}{\dfrac {r_i^{(t)^\lambda}-1}{\lambda }}&{\text{if }}\lambda \neq 0,\\ \quad \ln r^{(t)}_i&{\text{if }}\lambda =0,\end{cases}}
+    \label{formula:boxcox} \\ \eqname{Box-Cox Transformation}
+\end{align}
+
+where $r_i^{(t)(\lambda )}$ is the intraday return for a stock price at trading day $t$ after it was slightly adapted by a Box-Cox transformation with power parameter $\lambda$. In the following this transformed return is denoted as $r_i^{(t)}$ doe simplicity.
+
+
+\subsubsection{Exogenous Variables}
+\label{subsubsection:processing:exogenous}
+
+As stated in the beginning of this study, financial markets are prone to manifold external influences which are usually not modelled during regressing stock prices. This type of mis-specification of leaving out exogenous variables in models is quite common, because they can not be observed directly or their inclusion increase the problem space in an excessively manner. Therefore, economic models usually focus on a few variables which are of high interest.
+
+To account for those exogenous variables data normalization regarding the overall market behaviour is carried out. If the economy is doing well or experiences a period of uncertainty, this will be likely reflected in all stock prices. The selected stock prices are even part of the market index reflecting the overall market performance. Hence, omitting exogenous variable is another reason for spurious correlation \cite{Granger1969InvestigatingMethods}. A greater correlation between stock prices can be caused by a shared external factor which is the common market performance in this case. To have a better representation for the performance of a single stock, its returns needs to be normalized regarding the shared performance of the market. Further, the underlying movement of a stock price might even more be biased by the sentiment of the according industry section. Stocks from the same industry will therefore have a high cross-correlation without revealing a specific relationships, caused by the similar behaviour of investors in this section of the market.
+
+In the following, the return value will be subtracted by the average return value of its industry sector:
+
+\begin{align}
+    \hat r^{(t)}_i &= r^{(t)}_i - \frac{1}{|B_{j}^{(t)}|} \sum \limits_{r^{(t)}_k \in B_{j}^{(t)}} r^{(t)}_k
+    \label{formula:normalization} \\ \eqname{Industry Normalization}
+\end{align}
+
+where $B_{j}^{(t)}$ is a set of the transformed intraday returns at trading day $t$ for all companies in the same industry sector as the company for $r^{(t)}_i$. The resulting normalized intraday return $\hat r^{(t)}_i$ will be denoted in the following as $r^{(t)}_i$.
+
+
+Normalizing by the S\&P~500 market index instead of the separate industry means will be examined by the distribution of resulting cross-correlations in Section~\ref{subsection:cross_correlation}.

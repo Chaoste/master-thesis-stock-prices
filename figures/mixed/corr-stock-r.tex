@@ -1,0 +1,33 @@
+\begin{table*}
+    \centering
+    \setlength{\tabcolsep}{0pt} % Default value: 6pt
+    
+    \begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}cccc}
+        \toprule
+        {} &  Pairwise Distance &  Same Industry \\
+        \midrule
+        \textbf{Price}        & -0.0131 & 0.0553 \\
+        \textbf{Return}       &  0.0936 & \textbf{0.2679} \\
+        \textbf{Normalized}   &  0.1091 & 0.1963 \\
+        \textbf{Residuals}    &  \textbf{0.1105} & 0.2013 \\
+        \bottomrule
+    \end{tabular*}
+    
+    \captionsetup{singlelinecheck=off}
+    \caption[foo bar]{Pearson's $r$ for the \emph{Pairwise Distance} and the heuristic \emph{Same Industry}, compared with the stock correlation based on the data from intermediate preprocessing steps: \begin{enumerate*}[label=(\roman*)]
+        \item original price
+        \item intraday returns
+        \item industry-wise normalized returns
+        \item residuals from autoregressive models
+    \end{enumerate*}.}
+    \label{table:corr-stock-r}
+\end{table*}
+
+% {} &  Distance &   Price &  Return &  Normalized &  Residuals &  Industry \\
+% \midrule
+% \textbf{Distance}          &  1.0000 & -0.0131 &  0.0936 & 0.1091 & 0.1105 & 0.1643 \\
+% \textbf{Price}             & -0.0131 &  1.0000 &  0.1783 & 0.0418 & 0.0398 & 0.0553 \\
+% \textbf{Return}            &  0.0936 &  0.1783 &  1.0000 & 0.1296 & 0.1299 & 0.2679 \\
+% \textbf{Normalized}        &  0.1091 &  0.0418 &  0.1296 & 1.0000 & 0.9882 & 0.1963 \\
+% \textbf{Residuals}         &  0.1105 &  0.0398 &  0.1299 & 0.9882 & 1.0000 & 0.2013 \\
+% \textbf{Industry}          &  0.1643 &  0.0553 &  0.2679 & 0.1963 & 0.2013 & 1.0000 \\

@@ -1,0 +1,57 @@
+Until this point, features from two different datasets were extracted which might be related to business relationships. Unfortunately, there are no true labels available for validating the features suitability. Instead, the features from both types of data are compared to each other. Since they are both considered to be, at least, related to the latent variable, namely the business relationship, a correlation should be observable.
+
+For measuring bivariate correlation, there are several approaches established. As mentioned earlier in this work, Pearson's $r$ is among the most popular ones. Even though it is a very common metric, it only considers a linear relationship. Since this evaluation covers non-temporal variables which share no common data source, spurious correlation is assumed to be not present or have a negligible impact.
+
+To account for nonlinear monotonic relationships and get more robust results on non-normal, skewed or heteroscedastic data, a rank-based correlation like Spearman's $\rho$ or Kendall's $\tau$ is recommended \cite{Kowalski1972OnCoefficient}. The latter is generally preferred since it has a lower gross-error-sensitivity \cite{Croux2010InfluenceMeasures} and therefore offers a more robust estimation of the underlying population with more reliable confidence intervals \cite{Newson2002ParametersDifferences}. In the following, $r$ and $\tau$ are examined for the stock correlation from Section~\ref{section:statistical_analysis} and the three extracted news feature from Section~\ref{section:text_analysis}. As an comparable heuristic, a dichotomous feature called \textbf{Same Industry} is added. It equals one if a pair of companies originated from the same industry, otherwise it equals zero.
+
+Because the news reveal occurrences for 443 companies and stock prices were available for 467 companies, only those were considered for which both co-occurrences and stock price correlation could be generated. This resulted in 417 companies and 86.736 unique bidirectional pairs.
+
+In the following two experiments will be conducted. At first, the three news-based features for co-occurrence are correlated with the stock cross-correlations to find out, which is to be the most suitable one. Subsequently in the second experiment, the most promising news-based feature is compared with the intermediate preprocessing steps for the stock prices in order to evaluate if they are supportive for a higher correlation with co-occurrence.
+
+Because all co-occurrence features consider the presence of a relationship without describing its semantic, they can not be directly correlated with the stock correlations. Instead, the stock correlation will be adjusted by taking their absolute value. Hence, they do not account for negative relationships either.
+
+% https://stats.stackexchange.com/questions/8071/how-to-choose-between-pearson-and-spearman-correlation
+% https://stats.stackexchange.com/questions/3730/pearsons-or-spearmans-correlation-with-non-normal-data
+
+
+\subsection{Text-based Features}
+\label{subsection:evaluate_text_features}
+
+\input{figures/mixed/corr-text-r.tex}
+
+The three features extracted from news, namely \textbf{Co-occurrences}, \textbf{Minimum Distance}, \textbf{Pairwise Distance}, are compared with the stock correlations calculated on the price residuals which are considered to be the most stable data and free of autoregressive properties. Pearson's $r$ for the text-based features, stock correlation and the industry feature is reported in Table~\ref{table:corr-text-r}. Compared with the stock correlation, all three text-based features reveal a highly significant linear correlation exceeding the 99~\% confidence interval. The distance based approaches are superior to the plain co-occurrences features. The pure co-occurrences features might be affected by the selection of news topics, leading to small values for sparsely occurring but important companies. The other two features do not account for the overall number of mentions but only rate the average distance between entities of two companies. This leads to the supposition that the frequency is less important than the intensity of co-occurrences for describing the relationship of two companies. The highest correlation is observed for the more sophisticated approach, the pairwise distance, which might be caused by the higher number of accounted co-occurrences and therefore leads to a higher precision.
+
+\input{figures/mixed/corr-text-tau.tex}
+
+The monotonic relationship measured by the rank-based coefficient Kendall's $\tau$ is shown in Table~\ref{table:corr-text-tau}. Measured upon presence of correlation, $\tau$ is considered to be more restrictive which can be observed for all three text-based features compared to stock correlation. The advantage of using ranked variables instead of absolute values can be observed for the correlation between both features industry and co-occurrences. Both rely on integer values and thus interfere the correlation coefficient measured by $r$ which assumes continuous variables.
+
+Contradictory to the previous findings based on $r$, there is no great difference between the three text-based approaches for $\tau$. The discrepancies might be caused by $\tau$ considering any kind of monotonic relationship but putting less focus on an actual plain linear relationships. However, it raises doubts about whether the distance based measures are actually superior and whether the pairwise distance is the most promising approach. Nevertheless, all three correlations are again significant with 99~\% confidence and therefore valuable features for reflecting business relationships.
+
+\subsection{Stock Correlations}
+
+For retrospectively inspecting the impact of preprocessing steps on the stock prices, the pairwise distance is compared with each preprocessing step in Table~\ref{table:corr-stock-r}. It should be noted that all stock correlations except for the one based upon model residuals are prone to spurious correlation and therefore need to be treated with caution.
+
+\input{figures/mixed/corr-stock-r.tex}
+
+As one might expect, no significant relationship can be observed based upon original stock prices. After taking the daily returns, the relationship is present justifying this step. Considering $r$, the relationship again increases after industry-wise normalization and taking the residuals from autoregressive models. Although industry affiliation appears to be highly correlated with the pairwise distance, the stock correlation increases after this factor is assumed to be removed.
+
+\input{figures/mixed/corr-stock-tau.tex}
+
+Even the more conservative correlation coefficients for $\tau$ in Table~\ref{table:corr-stock-tau} show an increase of correlation throughout all preprocessing steps. For the original stock price, a negative correlation with the pairwise distance can be observed. As shown in earlier in this work, correlation based on these values reveal large spurious correlation which make further evaluation on them neglectable. Hence, the observation of a negative relationship between stock correlation and business relationship is not supported.
+
+
+\subsection{Period of Comparison}
+As pointed out previously in Section~\ref{section:data}, the selected time periods from both considered datasets do not match. Because the relationship extracted from news are expected to have a long-term impact, the text-based features are generated from 2006 until 2013 while the stock correlations are generated on historical prices from the last four years only. To inspect the impact of this decision, all text-based features were recalculated for the same period as for the stock prices. Though the values for $r$ from the previous tables did increase by a few thousandths, the difference is very small and therefore considered to be not significant. This might be justified by the fact that a majority of articles is distributed over the same four years as the historical stock prices.
+
+\subsection{Discussion}
+
+In the first part of analysis, namely the statistical analysis, it is shown that stock prices are continuously influencing each other which is expressed by the correlation coefficient for each pair of stocks. Autoregressive features are eliminated or, at least, substantially reduced to avoid spurious correlation. Even though the prices are normalized by the industrial mean, there is a high correlation with the membership of industry. This indicates that the stock price is not only affected by the well being of the whole industry but also single competitors and business partners which are not reflected by the overall mean. Referring to the problem definition in Section~\ref{section:problem_definition}, it is shown that stock prices share some simultaneous evolution expressed by their cross-correlation. Hence, the assessment of a stocks intrinsic value should include related stocks.
+
+In order to argue for a deeper meaning of observed stock correlations, the common business relationship of two companies is proposed as a potential origin. To find a valuable proxy for such business relationship, the second analysis section dealed with feature extraction from financial news articles. As indicated by the graph in Figure~\ref{fig:graph-cooccurrence-pairwise}, the relationships extracted from news might reveal some meaning which is assumed to be linked to the underlying business relationships among companies.
+% Unfortunately, the text-based features are not normalized by a industry wide behaviour causing an imbalance between both types of features. BUT: the industry-normalization is not considered to vanish all internal industry relations which is supported by the graph back in Section~\ref{subsection:cross_correlation}
+
+In the final evaluation in Section~\ref{subsection:evaluate_text_features}, the proxy of business relationships is compared with the relationships of stock prices. While the latter feature is a rather more concrete measurement, the business relationships are assumed to be represented by financial news which is motivated from a practical point of view. That the examined co-occurrences are actually a proper proxy to find out how companies are associated with each other, is a theoretical consideration which lacks verification. However, even if this motivation is based on erroneous assumptions, the feature \textbf{Pairwise Distance} still reveals a significant correlation with stock cross-correlations. 
+
+This observed relationship between both features, gives evidence for my hypothesis that the business relationship is supportive for the assessment of a stocks intrinsic value. If two companies reveal a strong business relationship, both related stock prices are supportive for assessing each stocks intrinsic value separately.
+
+% \todo{More critical?}

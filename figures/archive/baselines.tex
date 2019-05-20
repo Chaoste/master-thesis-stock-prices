@@ -1,0 +1,19 @@
+\begin{table*}[!ht]
+    \centering
+    \setlength{\tabcolsep}{0pt} % Default value: 6pt
+    
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccccccc}
+        \toprule
+        {} &     $\mathbf{A_{-1}}$ &      $\mathbf{A_{0}}$ &      $\mathbf{A_{1}}$ &    $\mathbf{HV_{1d}}$ &    $\mathbf{HS_{7d}}$ &    $\mathbf{HS_{3d}}$ &    $\mathbf{HS_{1d}}$ &                $\mathbf{LSTM}$ \\
+        \midrule
+        \textbf{prec} &  0.030 &  0.385 &  0.041 &  0.476 &  0.484 &   0.476 &  0.492 &  $0.502 \pm 0.002$ \\
+        \textbf{rec } &  0.175 &  0.620 &  0.203 &  0.537 &  0.610 &  0.572 &  0.491 &  $0.579 \pm 0.003$ \\
+        \textbf{f1  } &  0.052 &  0.475 &  0.069 &  0.498 &  0.489 &  0.500 &  0.492 &  $0.523 \pm 0.001$ \\
+        \textbf{acc } &  0.175 &  0.620 &  0.203 &  0.537 &  0.610 &  0.572 &  0.491 &  $0.579 \pm 0.003$ \\
+        \textbf{mcc } &        0 &        0 &        0 &  0.045 &  0.032 &  0.034 &  0.064 &  $0.092 \pm 0.004$ \\
+        \bottomrule
+    \end{tabular*}
+
+    \caption{All baselines are only incorporating at most stock price related values. For comparison, the first three columns $\mathbf{A_{-1}}$, $\mathbf{A_{0}}$, $\mathbf{A_{1}}$ show the metrics for predicting always -1, 0 or 1. The heuristic $\mathbf{HV_{1d}}$ predicts the same movement as the volatility of the previous day. The following heuristics $\mathbf{HS_{7d}}$, $\mathbf{HS_{3d}}$ and $\mathbf{HS_{1d}}$ predict based on the average stock price movement of the last seven days, three days or just the previous day. The \textbf{LSTM} approach is actually the only learning based baseline which tries to find patterns in the stock price of the last seven days.}
+    \label{table:baselines}
+\end{table*}
